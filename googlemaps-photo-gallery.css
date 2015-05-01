@@ -1,0 +1,56 @@
+@charset "utf-8";
+/*
+ Plugin Name: Google Maps Photo Gallery
+ googlemaps-photo-gallery.css
+*/
+#googlemaps_photo_gallery #gmap {
+	width:100%;
+	height:600px;
+  margin-bottom: 5px;
+}
+
+#googlemaps_photo_gallery #gmap img {
+	max-width: none !important;
+}
+
+/* Boxer Customize
+--------------------------------------------- */
+#boxer.googlemaps_photo_gallery {
+  border-radius: 0;
+}
+
+#boxer.googlemaps_photo_gallery:not(.mobile) .boxer-control.previous,
+#boxer.googlemaps_photo_gallery:not(.mobile) .boxer-control.next {
+  opacity: 0;
+}
+
+#boxer.googlemaps_photo_gallery:not(.mobile):hover .boxer-control.previous,
+#boxer.googlemaps_photo_gallery:not(.mobile):hover .boxer-control.next {
+  opacity: 1;
+}
+
+#boxer.googlemaps_photo_gallery:not(.mobile) .boxer-control.previous.disabled,
+#boxer.googlemaps_photo_gallery:not(.mobile) .boxer-control.next.disabled {
+  opacity: 0;
+}
+
+#boxer.googlemaps_photo_gallery .boxer-control.next {
+  right: 10px;
+}
+
+#boxer.googlemaps_photo_gallery .boxer-control.previous {
+  left: 10px;
+}
+
+#boxer.googlemaps_photo_gallery .boxer-meta {
+  padding-top: 0;
+}
+
+#boxer.googlemaps_photo_gallery .boxer-position {
+  display: none;
+}
+
+#boxer.googlemaps_photo_gallery .boxer-close {
+  right: -15px;
+  top: -15px;
+}
