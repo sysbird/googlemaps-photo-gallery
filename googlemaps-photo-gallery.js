@@ -9,11 +9,11 @@ jQuery( function(){
 
 	var map;
 	var click_marker = false;
-	var photo_max = jQuery( '#googlemaps_photo_gallery .swiper-wrapper a' ).length;
-	var thumbnail_width = jQuery( '#googlemaps_photo_gallery .swiper-wrapper a' ).outerWidth() + parseInt(jQuery( '#googlemaps_photo_gallery .swiper-wrapper a').css('margin-left'), 10 ) + parseInt( jQuery('#googlemaps_photo_gallery .swiper-wrapper a').css( 'margin-right' ), 10 );
+	var photo_max = jQuery( '#googlemaps_photo_gallery .zoom-gallery a' ).length;
+	var thumbnail_width = jQuery( '#googlemaps_photo_gallery .zoom-gallery a' ).outerWidth() + parseInt(jQuery( '#googlemaps_photo_gallery .zoom-gallery a').css('margin-left'), 10 ) + parseInt( jQuery('#googlemaps_photo_gallery .zoom-gallery a').css( 'margin-right' ), 10 );
 	var thumbnails_clip = jQuery( '#googlemaps_photo_gallery .clip' ).width();
 	var thumbnails_max = thumbnail_width * photo_max;
-	jQuery( '#googlemaps_photo_gallery .swiper-wrapper' ).css( 'width', thumbnail_width * thumbnails_max + 'px' );
+	jQuery( '#googlemaps_photo_gallery .zoom-gallery' ).css( 'width', thumbnail_width * thumbnails_max + 'px' );
 	jQuery( window ).load( function() {
 		initialize();
 	} );
@@ -38,8 +38,8 @@ jQuery( function(){
 			mapTypeId: google.maps.MapTypeId.ROADMAP };
 		map = new google.maps.Map( document.getElementById( 'gmap' ), myOptions );
 
-		// Set marker with photo
-		jQuery( '#googlemaps_photo_gallery .swiper-wrapper a img' ).each( function(){
+		// Set maeker with photo
+		jQuery( '#googlemaps_photo_gallery .zoom-gallery a img' ).each( function(){
 			var lat = jQuery(this).attr( 'lat' );
 			var lon = jQuery(this).attr( 'lon' );
 			var src = jQuery(this).attr( 'src' );
@@ -69,8 +69,23 @@ jQuery( function(){
 		} );
 	}
 
+	// Hover thumbnail
+	jQuery('#googlemaps_photo_gallery .zoom-gallery a').hover(function () {
+		var index = jQuery( '#googlemaps_photo_gallery .zoom-gallery a' ).index( this );
+		var left = parseInt( jQuery( '#googlemaps_photo_gallery .zoom-gallery' ).css( 'left' ) ) +(thumbnail_width * index);
+		if( 0 >= left ) {
+			thumbnails_scroll(false);
+		}
+		else {
+			left += thumbnail_width;
+			if( thumbnails_clip <= left ) {
+				thumbnails_scroll(true);
+			}
+		}
+	} );
+
 	// Click thumbnail
-	jQuery('#googlemaps_photo_gallery .swiper-wrapper a').click(function () {
+	jQuery('#googlemaps_photo_gallery .zoom-gallery a').click(function () {
 		if( !click_marker ) {
 			var lat = jQuery(this).find('img').attr( 'lat' );
 			var lon = jQuery(this).find('img').attr( 'lon' );
@@ -80,28 +95,62 @@ jQuery( function(){
 		click_marker = false;
 	} );
 
-   	// Swiper
-    var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        slidesPerView: 6,
-        paginationClickable: true,
-        spaceBetween: 5,
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
-        grabCursor: true
-    });
-
-   	// Boxer
-	var boxer_mobile = false;
-	var boxer_class = jQuery( '#googlemaps_photo_gallery' ).attr( 'class' );
-	if( boxer_class ){
-		if( 0 <= boxer_class.indexOf( 'mobile' ) ){
-			boxer_mobile = true;
+	// Click thumbnails page
+	jQuery('#googlemaps_photo_gallery a.page').click(function () {
+		var param = jQuery( this ).attr( 'class' );
+		if( 0 <= param.indexOf( "left", 0 ) ) {
+			thumbnails_scroll(false);
 		}
+		else{
+			// right
+			thumbnails_scroll(true);
+		}
+
+		return false;
+	} );
+
+	// thumbnails scroll
+	function thumbnails_scroll(right) {
+		var left = parseInt( jQuery( '#googlemaps_photo_gallery .zoom-gallery' ).css( 'left' ) );
+		if( right ) {
+			// right
+			left -= thumbnail_width;
+			if( left < ( thumbnails_clip - thumbnails_max ) ){
+				left = thumbnails_clip - thumbnails_max;
+			}
+		}
+		else{
+			// left
+			left += thumbnail_width;
+			if( 0 < left ) {
+				left = 0;
+			}
+		}
+		jQuery( '#googlemaps_photo_gallery .zoom-gallery' ).stop( true, true ).animate( { left: left + 'px' } );
 	}
 
-	jQuery('.swiper-wrapper a').boxer( {
-		mobile: boxer_mobile,
-		customClass: "googlemaps_photo_gallery",
+	// Zoom-gallery
+	jQuery('.zoom-gallery').magnificPopup( {
+		delegate: 'a',
+		type: 'image',
+		closeOnContentClick: false,
+		closeBtnInside: false,
+		mainClass: 'mfp-with-zoom mfp-img-mobile',
+		image: {
+			verticalFit: true,
+			titleSrc: function( item ) {
+				return item.el.find( 'img' ).attr( 'alt' ) + '';
+			}
+		},
+		gallery: {
+			enabled: true
+		},
+		zoom: {
+			enabled: true,
+			duration: 300, // don't foget to change the duration also in CSS
+			opener: function(element) {
+				return element.find('img');
+			}
+		}
 	} );
 } ); 

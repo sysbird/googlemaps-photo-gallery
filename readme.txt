@@ -2,9 +2,9 @@
 Contributors: sysbird
 Plugin URI: http://wordpress.org/plugins/googlemaps-photo-gallery/
 Tags: shortcode, google, map, photo, gallery, gps, geo, location, lightbox
-Requires at least: 3.8
-Tested up to: 4.2
-Stable tag: 1.2
+Requires at least: 3.0
+Tested up to: 3.8
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,8 +19,7 @@ The gallery on Google Maps with geotagged photos.
 * When clicked the photo on the gallery, zoom in image with lightbox.  
 * It's compatible with responsive web design.    
 * Based on [Google Maps JavaScript API v3](https://developers.google.com/maps/documentation/javascript/).  
-* [Boxer](http://classic.formstone.it/boxer/) the jQuery plugin is licensed under MIT.  
-* [Swiper](http://www.idangero.us/swiper/) the jQuery plugin is licensed under MIT.  
+* [Magnific Popup](http://dimsemenov.com/plugins/magnific-popup/) the jQuery plugin is licensed under MIT.  
 
 = Usage =
 1. Upload geotagged photos in post.  
@@ -33,7 +32,7 @@ The gallery on Google Maps with geotagged photos.
 [Demo](http://www.sysbird.jp/birdsite/2007/09/21/20070921-hakodate/)  
 
 = Contributors =
-TORIYAMA Yuko at [sysbird](https://profiles.wordpress.org/sysbird/)  
+TORIYAMA Yuko at [sysbird](http://www.sysbird.jp/wptips/)  
 
 = More Information =
 [Description in Japanese](http://www.sysbird.jp/wptips/googlemaps-photo-gallery/)  
@@ -50,10 +49,6 @@ TORIYAMA Yuko at [sysbird](https://profiles.wordpress.org/sysbird/)
 
 
 == Changelog ==
-= 1.2 =
-* Changed the jQuery plugin for lightbox by Boxer.  
-* Add the jQuery plugin for mobile touch slider by Swiper.  
-
 = 1.1 =
 * Changed the jQuery plugin for lightbox.  
 
