@@ -2,10 +2,12 @@
 /*
  Plugin Name: Google Maps Photo Gallery
  Plugin URI: http://www.sysbird.jp/wptips/googlemaps-photo-gallery/
- Description: The shortcode for gallery on Google Maps of photos with GPS.
+ Description: The shortcode for gallery on Google Maps with geotagged photos.
  Author: sysbird
  Author URI: https://profiles.wordpress.org/sysbird/
- Version: 1.2
+ Text Domain: googlemaps-photo-gallery
+ Domain Path: /languages
+Version: 1.2
  License: GPLv2 or later
 */
 
@@ -24,6 +26,8 @@ class GoogleMapsPhotoGallery {
 	// construct
 	function __construct() {
 
+		load_plugin_textdomain( 'googlemaps-photo-gallery', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
+
 		add_action( 'init', array( $this, 'init' ) );
 	}
 
@@ -36,6 +40,7 @@ class GoogleMapsPhotoGallery {
 		add_action( 'wp_print_styles', array( &$this, 'add_style' ) );
 		add_action( 'admin_menu', array( &$this, 'admin_menu' ) );
 		add_action( 'admin_init', array( &$this, 'settings_init' ) );
+		add_action( 'admin_init', array( $this, 'load_textdomain' ) );
 
 		$option = get_option( 'googlemaps_photo_gallery_settings' );
 		$apikey = trim( $option['api_key_field'] );
@@ -64,19 +69,19 @@ class GoogleMapsPhotoGallery {
 		register_setting(
 			'googlemapsphotogallerypage',
 			'googlemaps_photo_gallery_settings',
-			array( $this, 'data_sanitize' )
+			array( $this, 'sanitize' )
 		);
 
 		add_settings_section(
 			'googlemaps_photo_gallery_settings_section',
-			esc_html__( 'Google Maps Photo Gallery', 'googlemaps-photo-gallery' ),
+			esc_html__( 'Google Maps Photo Gallery settings', 'googlemaps-photo-gallery' ),
 			array( $this, 'googlemaps_photo_gallery_settings_section_callback' ),
 			'googlemapsphotogallerypage'
 		);
 
 		add_settings_field(
 			'api_key_field',
-			esc_html__( 'Google Maps API key', 'googlemaps-photo-gallery' ),
+			esc_html__( 'Set API Key', 'googlemaps-photo-gallery' ),
 			array( $this, 'api_key_field_render' ),
 			'googlemapsphotogallerypage',
 			'googlemaps_photo_gallery_settings_section'
@@ -84,10 +89,20 @@ class GoogleMapsPhotoGallery {
 	}
 
 	//////////////////////////////////////////////////////
+	// Load textdomain.
+	function load_textdomain() {
+
+		load_plugin_textdomain(
+			'googlemaps-photo-gallery',
+			false,
+			plugin_basename( dirname( __FILE__ ) ) . '/languages' );
+	}
+
+	//////////////////////////////////////////////////////
 	// Add description of Post Notifier.
 	function googlemaps_photo_gallery_settings_section_callback() {
-		// The gallery on Google Maps of photos with GPS.
-		echo esc_html__( 'The shortcode for gallery on Google Maps of photos with GPS.', 'googlemaps-photo-gallery' );
+
+		echo esc_html__( 'The shortcode for gallery on Google Maps with geotagged photos.', 'googlemaps-photo-gallery' );
 		?>
 		<br>
 		<?php
@@ -121,6 +136,24 @@ class GoogleMapsPhotoGallery {
 
 			submit_button();
 
+			$maps_api_for_web_link = sprintf(
+				'%1$s<a href="https://developers.google.com/maps/web/">%2$s</a>',
+				esc_html__( 'Go to ', 'googlemaps-photo-gallery' ),
+				esc_html__( 'Google Maps API Web', 'googlemaps-photo-gallery' )
+			);
+
+			$html  = '';
+			$html .= '<h2>' .esc_html__( 'How to get API key?', 'googlemaps-photo-gallery' ) .'</h2>';
+			$html .= '<ol>';
+			$html .= '<li>' .$maps_api_for_web_link .'</li>';
+			$html .= '<li>' .esc_html__( 'Get the API key on the [Credentials] page.', 'googlemaps-photo-gallery' ) .'</li>';
+			$html .= '<li>' .esc_html__( 'Set the API key limit for referrer at only your website.
+', 'googlemaps-photo-gallery' ) .'</li>';
+			$html .= '<li>' .esc_html__( 'Activate the Google Maps JavaScript API.', 'googlemaps-photo-gallery' ) .'</li>';
+			$html .= '</ol>';
+
+			echo $html;
+
 		?>
 		</form>
 
@@ -129,7 +162,7 @@ class GoogleMapsPhotoGallery {
 
 	//////////////////////////////////////////////////////
 	// Sanitize API key
-	public function data_sanitize( $input ) {
+	public function sanitize( $input ) {
 
 		$new_input = array();
 		$api_key = isset( $input['api_key_field'] ) ? $input['api_key_field'] : '';
@@ -188,7 +221,8 @@ class GoogleMapsPhotoGallery {
 	//////////////////////////////////////////
 	// add JavaScript
 	function add_script() {
-		wp_enqueue_script( 'gmap', 'http://maps.google.com/maps/api/js?sensor=false');
+
+		wp_enqueue_script( 'gmap', $this->get_api_url());
 
 		$filename = plugins_url( dirname( '/' .plugin_basename( __FILE__ ) ) ).'/googlemaps-photo-gallery.js';
 		wp_enqueue_script( 'googlemaps-photo-gallery', $filename, array( 'jquery' ), '1.2' );
@@ -200,11 +234,29 @@ class GoogleMapsPhotoGallery {
 	//////////////////////////////////////////
 	// add CSS
 	function add_style() {
+
 		$filename = plugins_url( dirname( '/' .plugin_basename( __FILE__ ) ) ).'/googlemaps-photo-gallery.css';
 		wp_enqueue_style( 'googlemaps-photo-gallery', $filename, false, '1.2' );
 
 		$filename = plugins_url( dirname( '/' .plugin_basename( __FILE__ ) ) ).'/magnific-popup/magnific-popup.css';
 		wp_enqueue_style( 'googlemaps-photo-gallery-magnific-popup', $filename, false, '1.0.0' );
+	}
+
+	//////////////////////////////////////////
+	// Google Maps URL and API Key
+	function get_api_url() {
+
+		$options = get_option( 'googlemaps_photo_gallery_settings' );
+
+		if ( ! empty( $options['api_key_field'] ) ) {
+			$apikey  = "?key=" . $options['api_key_field'];
+		} else {
+			$apikey  = "";
+		}
+
+		$url = esc_url( '//maps.googleapis.com/maps/api/js' . $apikey );
+
+		return $url;
 	}
 
 	//////////////////////////////////////////
@@ -223,8 +275,8 @@ class GoogleMapsPhotoGallery {
 				$lat_m = explode( "/",$lat[1] );
 				$lat_s = explode( "/",$lat[2] );
 				$latitude = intval( $lat_d[0] ) / intval( $lat_d[1] )
-				             + ( intval($lat_m[0] ) / intval($lat_m[1] ) )/60
-				             + ( intval($lat_s[0] ) / intval($lat_s[1] ) )/3600;
+							+ ( intval($lat_m[0] ) / intval($lat_m[1] ) )/60
+							+ ( intval($lat_s[0] ) / intval($lat_s[1] ) )/3600;
 				if ( $exif['GPSLatitudeRef'] == "S" ) {
 					$latitude = $latitude * -1;
 				}
@@ -234,8 +286,8 @@ class GoogleMapsPhotoGallery {
 				$lng_m = explode( "/",$lng[1] );
 				$lng_s = explode( "/",$lng[2] );
 				$longitude = intval( $lng_d[0] ) / intval($lng_d[1] )
-				             + ( intval($lng_m[0] ) / intval($lng_m[1] ) )/60
-				             + ( intval($lng_s[0] ) / intval($lng_s[1] ) )/3600;
+							+ ( intval($lng_m[0] ) / intval($lng_m[1] ) )/60
+							+ ( intval($lng_s[0] ) / intval($lng_s[1] ) )/3600;
 				if ( $exif['GPSLongitudeRef'] == "W" ) {
 					$longitude = $longitude * -1;
 				}
@@ -272,7 +324,9 @@ class GoogleMapsPhotoGallery {
 						'post_mime_type' => 'image',
 						'orderby'        => 'menu_order',
 						'order'          => 'ASC' );
+
 		$images = get_posts( $args );
+
 		if ( $images ) {
 			foreach( $images as $image ){
 				$src = wp_get_attachment_url( $image->ID );
@@ -284,7 +338,7 @@ class GoogleMapsPhotoGallery {
 					$attr = ' lat="' .$gps['lat'] .'" lon="' .$gps['lon'] .'"';
 					$output .= '<a href="' .$src .'" class="magnific-popup" id="googlemaps_photo_gallery-' .$image->ID .'"><img src="' .$thumbnail[0] .'" alt="' .$image->post_title .'"' .$attr .'></a>';
 				}
-  			}
+			}
 		}
 
 		if( !empty( $output ) ){

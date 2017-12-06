@@ -1,0 +1,81 @@
+# Copyright (C) 2017 Google Maps Photo Gallery
+# This file is distributed under the same license as the Google Maps Photo Gallery package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Maps Photo Gallery 1.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/google-maps-photo-gallery\n"
+"POT-Creation-Date: 2017-12-05 00:00:22+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: googlemaps-photo-gallery.php:77
+msgid "Google Maps Photo Gallery settings"
+msgstr ""
+
+#: googlemaps-photo-gallery.php:84
+msgid "Set API Key"
+msgstr ""
+
+#: googlemaps-photo-gallery.php:109
+msgid "Please set your Google Maps API key."
+msgstr ""
+
+#: googlemaps-photo-gallery.php:140
+msgid "Go to "
+msgstr ""
+
+#: googlemaps-photo-gallery.php:142
+msgid "Google Maps API Web"
+msgstr ""
+
+#: googlemaps-photo-gallery.php:146
+msgid "How to get API key?"
+msgstr ""
+
+#: googlemaps-photo-gallery.php:149
+msgid "Get the API key on the [Credentials] page."
+msgstr ""
+
+#: googlemaps-photo-gallery.php:150
+msgid "Set the API key limit for referrer at only your website."
+msgstr ""
+
+#: googlemaps-photo-gallery.php:151
+msgid "Activate the Google Maps JavaScript API."
+msgstr ""
+
+#: googlemaps-photo-gallery.php:180 googlemaps-photo-gallery.php:191
+msgid "Check your API key."
+msgstr ""
+
+#: googlemaps-photo-gallery.php:210
+msgid "Settings page"
+msgstr ""
+
+#: googlemaps-photo-gallery.php:214
+msgid "Google Maps Photo Gallery, you need an API key. Please move to the %1$s."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Google Maps Photo Gallery"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.sysbird.jp/wptips/googlemaps-photo-gallery/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "The shortcode for gallery on Google Maps with geotagged photos."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "TORIYAMA Yuko at sysbird"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://profiles.wordpress.org/sysbird/"
+msgstr ""
