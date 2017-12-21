@@ -2,8 +2,8 @@
 Contributors: sysbird
 Plugin URI: http://wordpress.org/plugins/googlemaps-photo-gallery/
 Tags: shortcode, google, map, photo, gallery, gps, geo, location, lightbox
-Requires at least: 3.0
-Tested up to: 3.8
+Requires at least: 4.9
+Tested up to: 4.0
 Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

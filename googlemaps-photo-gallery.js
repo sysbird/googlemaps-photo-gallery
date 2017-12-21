@@ -55,11 +55,11 @@ jQuery( function(){
 								info: id });
 
 			// Marker Click
-			google.maps.event.addListener( marker, 'click', function( event ) {  
+			google.maps.event.addListener( marker, 'click', function( event ) {
 				var id = marker.info;
 				click_marker = true;
 				jQuery( "#" + id ).click();
-			} ); 
+			} );
 
 			// Center
 			count++;
@@ -69,88 +69,32 @@ jQuery( function(){
 		} );
 	}
 
-	// Hover thumbnail
-	jQuery('#googlemaps_photo_gallery .zoom-gallery a').hover(function () {
-		var index = jQuery( '#googlemaps_photo_gallery .zoom-gallery a' ).index( this );
-		var left = parseInt( jQuery( '#googlemaps_photo_gallery .zoom-gallery' ).css( 'left' ) ) +(thumbnail_width * index);
-		if( 0 >= left ) {
-			thumbnails_scroll(false);
-		}
-		else {
-			left += thumbnail_width;
-			if( thumbnails_clip <= left ) {
-				thumbnails_scroll(true);
-			}
-		}
-	} );
-
-	// Click thumbnail
-	jQuery('#googlemaps_photo_gallery .zoom-gallery a').click(function () {
-		if( !click_marker ) {
-			var lat = jQuery(this).find('img').attr( 'lat' );
-			var lon = jQuery(this).find('img').attr( 'lon' );
-			map.setCenter( new google.maps.LatLng( lat, lon ) );
-		}
-
-		click_marker = false;
-	} );
-
-	// Click thumbnails page
-	jQuery('#googlemaps_photo_gallery a.page').click(function () {
-		var param = jQuery( this ).attr( 'class' );
-		if( 0 <= param.indexOf( "left", 0 ) ) {
-			thumbnails_scroll(false);
-		}
-		else{
-			// right
-			thumbnails_scroll(true);
-		}
-
-		return false;
-	} );
-
-	// thumbnails scroll
-	function thumbnails_scroll(right) {
-		var left = parseInt( jQuery( '#googlemaps_photo_gallery .zoom-gallery' ).css( 'left' ) );
-		if( right ) {
-			// right
-			left -= thumbnail_width;
-			if( left < ( thumbnails_clip - thumbnails_max ) ){
-				left = thumbnails_clip - thumbnails_max;
-			}
-		}
-		else{
-			// left
-			left += thumbnail_width;
-			if( 0 < left ) {
-				left = 0;
-			}
-		}
-		jQuery( '#googlemaps_photo_gallery .zoom-gallery' ).stop( true, true ).animate( { left: left + 'px' } );
-	}
-
-	// Zoom-gallery
-	jQuery('.zoom-gallery').magnificPopup( {
-		delegate: 'a',
-		type: 'image',
-		closeOnContentClick: false,
-		closeBtnInside: false,
-		mainClass: 'mfp-with-zoom mfp-img-mobile',
-		image: {
-			verticalFit: true,
-			titleSrc: function( item ) {
-				return item.el.find( 'img' ).attr( 'alt' ) + '';
-			}
+	// Swiper for thumbnail
+	var swiper = new Swiper('.swiper-container', {
+		slidesPerView: 7,
+		spaceBetween: 10,
+		freeMode: true,
+		grabCursor: true,
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
 		},
-		gallery: {
-			enabled: true
-		},
-		zoom: {
-			enabled: true,
-			duration: 300, // don't foget to change the duration also in CSS
-			opener: function(element) {
-				return element.find('img');
-			}
+		breakpoints: {
+			1000: {
+				slidesPerView: 5,
+				spaceBetween: 10,
+			},
+			750: {
+				slidesPerView: 3,
+				spaceBetween: 5,
+			},
 		}
-	} );
-} ); 
+	});
+
+	// Zoom for thumbnail
+	jQuery("[data-fancybox]").fancybox({
+		buttons : [
+			'close'
+		],
+	});
+} );

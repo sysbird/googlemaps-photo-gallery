@@ -12,57 +12,17 @@
 	max-width: none !important;
 }
 
-#googlemaps_photo_gallery .thumbnails{
-	padding: 0 40px;
-	position : relative;
-}
-
-#googlemaps_photo_gallery .clip {
+#googlemaps_photo_gallery  .swiper-container {
+	margin: 1em 0;
 	width: 100%;
-	height: 86px;
-	margin-bottom: 1em;
-	overflow: hidden;
-	position : relative;
+	height: 100%;
 }
 
-#googlemaps_photo_gallery .thumbnails a.page {
+#googlemaps_photo_gallery .swiper-slide a {
 	display: block;
-	width: 30px;
-	height: 75px;
-	position : absolute;
-	top: 7px;
-	background: url("icon_arrow.png") left top;
-	display:block;
-	text-indent:-9999px;
-	overflow:hidden;
-	font-size:0;
 }
 
-#googlemaps_photo_gallery .thumbnails a.page.left {
-	left: 0;
-}
-
-#googlemaps_photo_gallery .thumbnails a.page.right {
-	background-position: right top;
-	right: 0;
-}
-
-#googlemaps_photo_gallery .zoom-gallery {
-	position : absolute;
-	top: 0;
-	left: 0;
-}
-
-#googlemaps_photo_gallery .zoom-gallery a {
-	display: block;
-	width: 75px;
-	float: left;
-	margin: 4px 4px 0 0;
-	border: solid 1px #CCC;
-	padding: 2px;
-}
-
-#googlemaps_photo_gallery .zoom-gallery a img {
+#googlemaps_photo_gallery .swiper-slide img {
 	width: 100%;
-	vertical-align:bottom;
+	vertical-align: bottom;
 }

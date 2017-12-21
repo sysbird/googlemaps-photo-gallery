@@ -26,8 +26,6 @@ class GoogleMapsPhotoGallery {
 	// construct
 	function __construct() {
 
-		load_plugin_textdomain( 'googlemaps-photo-gallery', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
-
 		add_action( 'init', array( $this, 'init' ) );
 	}
 
@@ -147,8 +145,7 @@ class GoogleMapsPhotoGallery {
 			$html .= '<ol>';
 			$html .= '<li>' .$maps_api_for_web_link .'</li>';
 			$html .= '<li>' .esc_html__( 'Get the API key on the [Credentials] page.', 'googlemaps-photo-gallery' ) .'</li>';
-			$html .= '<li>' .esc_html__( 'Set the API key limit for referrer at only your website.
-', 'googlemaps-photo-gallery' ) .'</li>';
+			$html .= '<li>' .esc_html__( 'Set the API key limit for referrer at only your website.', 'googlemaps-photo-gallery' ) .'</li>';
 			$html .= '<li>' .esc_html__( 'Activate the Google Maps JavaScript API.', 'googlemaps-photo-gallery' ) .'</li>';
 			$html .= '</ol>';
 
@@ -222,24 +219,37 @@ class GoogleMapsPhotoGallery {
 	// add JavaScript
 	function add_script() {
 
+		// Google Maps API
 		wp_enqueue_script( 'gmap', $this->get_api_url());
 
+		// swiper
+		$filename = plugins_url( dirname( '/' .plugin_basename( __FILE__ ) ) ).'/swiper/js/swiper.min.js';
+		wp_enqueue_script( 'googlemaps-photo-gallery-swiper', $filename, array( 'jquery' ), '4.0.7' );
+
+		// fancybox
+		$filename = plugins_url( dirname( '/' .plugin_basename( __FILE__ ) ) ).'/fancybox/jquery.fancybox.min.js';
+		wp_enqueue_script( 'googlemaps-photo-gallery-fancybox', $filename, array( 'jquery' ), 'v3.2.10' );
+
+		// this plugin
 		$filename = plugins_url( dirname( '/' .plugin_basename( __FILE__ ) ) ).'/googlemaps-photo-gallery.js';
 		wp_enqueue_script( 'googlemaps-photo-gallery', $filename, array( 'jquery' ), '1.2' );
-
-		$filename = plugins_url( dirname( '/' .plugin_basename( __FILE__ ) ) ).'/magnific-popup/jquery.magnific-popup.min.js';
-		wp_enqueue_script( 'googlemaps-photo-gallery-magnific-popup', $filename, array( 'jquery' ), '1.0.0' );
 	}
 
 	//////////////////////////////////////////
 	// add CSS
 	function add_style() {
 
+		// swiper
+		$filename = plugins_url( dirname( '/' .plugin_basename( __FILE__ ) ) ).'/swiper/css/swiper.min.css';
+		wp_enqueue_style( 'googlemaps-photo-gallery-swiper', $filename, false, '4.0.7' );
+
+		// fancybox
+		$filename = plugins_url( dirname( '/' .plugin_basename( __FILE__ ) ) ).'/fancybox/jquery.fancybox.min.css';
+		wp_enqueue_style( 'googlemaps-photo-gallery-fancybox', $filename, false, 'v3.2.10' );
+
+		// this plugin
 		$filename = plugins_url( dirname( '/' .plugin_basename( __FILE__ ) ) ).'/googlemaps-photo-gallery.css';
 		wp_enqueue_style( 'googlemaps-photo-gallery', $filename, false, '1.2' );
-
-		$filename = plugins_url( dirname( '/' .plugin_basename( __FILE__ ) ) ).'/magnific-popup/magnific-popup.css';
-		wp_enqueue_style( 'googlemaps-photo-gallery-magnific-popup', $filename, false, '1.0.0' );
 	}
 
 	//////////////////////////////////////////
@@ -313,7 +323,7 @@ class GoogleMapsPhotoGallery {
 		}
 
 		$zoom = $atts['zoom'];
-		if(0 <> $zoom){
+		if( 0 <> $zoom ){
 			$param .= ' zoom="' .$zoom .'"';
 		}
 
@@ -329,20 +339,23 @@ class GoogleMapsPhotoGallery {
 
 		if ( $images ) {
 			foreach( $images as $image ){
-				$src = wp_get_attachment_url( $image->ID );
-				$thumbnail = wp_get_attachment_image_src($image->ID, 'thumbnail');
+ 				$src = wp_get_attachment_url( $image->ID );
+				$thumbnail = wp_get_attachment_image_src( $image->ID, 'large' );
 				$file = get_attached_file( $image->ID );
-				$gps = $this->getGPS($file);
+				$gps = $this->getGPS( $file );
 				$attr = '';
 				if($gps){
 					$attr = ' lat="' .$gps['lat'] .'" lon="' .$gps['lon'] .'"';
-					$output .= '<a href="' .$src .'" class="magnific-popup" id="googlemaps_photo_gallery-' .$image->ID .'"><img src="' .$thumbnail[0] .'" alt="' .$image->post_title .'"' .$attr .'></a>';
+
+					$output .= ' <div class="swiper-slide"><a href="' .$src .'" data-fancybox="gallery-' .$post->ID .'" data-caption="' .$image->post_title .'" id="googlemaps_photo_gallery-' .$image->ID .'"><img src="' .$thumbnail[0] .'" alt="' .$image->post_title .'"' .$attr .'></a></div>';
 				}
 			}
+
+			wp_reset_postdata();
 		}
 
 		if( !empty( $output ) ){
-			$output = '<div id="googlemaps_photo_gallery"><div id="gmap"' .$param .'></div><div class="thumbnails"><a href="#" class="page left">Prev</a><div class="clip"><div class="zoom-gallery">' .$output .'</div></div><a href="#"class="page right">Next</a></div></div>';
+			$output = '<div id="googlemaps_photo_gallery"><div id="gmap"' .$param .'></div><div class="swiper-container"><div class="swiper-wrapper">' .$output .'</div><div class="swiper-button-next"></div><div class="swiper-button-next"></div></div></div>';
 		}
 
 		return $output;
