@@ -8,11 +8,13 @@ Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
+
 The gallery on Google Maps with geotagged photos.
 
 
 == Description ==
 The shortcode for gallery on Google Maps with geotagged photos.
+
 
 = Features =
 * The plugin displays a gallery on Google Maps with geotagged photos that has been uploaded to post.
@@ -20,6 +22,7 @@ The shortcode for gallery on Google Maps with geotagged photos.
 * It's compatible with responsive web design.
 * Based on [Google Maps JavaScript API v3](https://developers.google.com/maps/documentation/javascript/).
 * [Magnific Popup](http://dimsemenov.com/plugins/magnific-popup/) the jQuery plugin is licensed under MIT.
+
 
 = Usage =
 1. Upload geotagged photos in post.
@@ -29,10 +32,23 @@ The shortcode for gallery on Google Maps with geotagged photos.
    center: menu order of photo(default:the last photo)
    zoom: Google Maps zooming parameter(0-18 default:15)
 
+
 [Demo](https://birdsite.jp/2007/09/21/20070921-hakodate/)
+
+
+== Third-party Resources ==
+fancyBox3
+License: Licensed GPLv3 for open source use
+Source:  https://fancyapps.com/fancybox/3/
+
+Swiper
+License: Released under the MIT License
+Source:  http://www.idangero.us/swiper/
+
 
 = Contributors =
 TORIYAMA Yuko at [sysbird](https://profiles.wordpress.org/sysbird)
+
 
 = More Information =
 [Description in Japanese](http://www.sysbird.jp/wptips/googlemaps-photo-gallery/)
