@@ -4,61 +4,61 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Google Maps Photo Gallery 1.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/google-maps-photo-gallery\n"
-"POT-Creation-Date: 2017-12-05 00:00:22+00:00\n"
+"POT-Creation-Date: 2017-12-22 00:00:22+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-12-05 19:21+0900\n"
+"PO-Revision-Date: 2017-12-22 16:14+0900\n"
 "Last-Translator: TORIYAMA Yuko <sysbird@gmail.com>\n"
 "Language-Team: \n"
 "Language: ja\n"
 "X-Generator: Poedit 1.8.9\n"
 
-#: googlemaps-photo-gallery.php:77
+#: googlemaps-photo-gallery.php:75
 msgid "Google Maps Photo Gallery settings"
 msgstr "Google Maps Photo Gallery 設定"
 
-#: googlemaps-photo-gallery.php:84
+#: googlemaps-photo-gallery.php:82
 msgid "Set API Key"
 msgstr "APIキー"
 
-#: googlemaps-photo-gallery.php:109
+#: googlemaps-photo-gallery.php:107
 msgid "Please set your Google Maps API key."
 msgstr "Google Maps APIキーを取得して、設定してください。"
 
-#: googlemaps-photo-gallery.php:140
+#: googlemaps-photo-gallery.php:139
 msgid "Go to "
 msgstr "こちらのページへ移動します。"
 
-#: googlemaps-photo-gallery.php:142
+#: googlemaps-photo-gallery.php:140
 msgid "Google Maps API Web"
 msgstr "Google Maps API Web"
 
-#: googlemaps-photo-gallery.php:146
+#: googlemaps-photo-gallery.php:144
 msgid "How to get API key?"
 msgstr "APIキー取得方法"
 
+#: googlemaps-photo-gallery.php:147
+msgid "Click the [GET A KEY] button and get your API key."
+msgstr "[キーの取得] ボタンをクリックしてAPI キーを取得します。"
+
+#: googlemaps-photo-gallery.php:148
+msgid "Set API key limit for referrer at only your website."
+msgstr "APIキーの制限を、リファラーがあなたのウェブサイトのみになるように設定します。"
+
 #: googlemaps-photo-gallery.php:149
-msgid "Get the API key on the [Credentials] page."
-msgstr "[Credentials] ページで API キーを取得します。"
-
-#: googlemaps-photo-gallery.php:150
-msgid "Set the API key limit for referrer at only your website."
-msgstr "APIキーの制限を、リファラーがあなたのウェブサイトのみに設定をします。"
-
-#: googlemaps-photo-gallery.php:151
 msgid "Activate the Google Maps JavaScript API."
 msgstr "Google Maps JavaScript API をアクティベートします。"
 
-#: googlemaps-photo-gallery.php:180 googlemaps-photo-gallery.php:191
+#: googlemaps-photo-gallery.php:178 googlemaps-photo-gallery.php:189
 msgid "Check your API key."
 msgstr "APIキーを確認してください。"
 
-#: googlemaps-photo-gallery.php:210
+#: googlemaps-photo-gallery.php:208
 msgid "Settings page"
 msgstr "設定ページ"
 
-#: googlemaps-photo-gallery.php:214
+#: googlemaps-photo-gallery.php:212
 msgid "Google Maps Photo Gallery, you need an API key. Please move to the %1$s."
 msgstr "Google Maps Photo GalleryプラグインはGoogle Maps APIキーが必要です。%1$sへ移動して設定してください。"
 

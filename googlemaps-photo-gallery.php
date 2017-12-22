@@ -144,8 +144,8 @@ class GoogleMapsPhotoGallery {
 			$html .= '<h2>' .esc_html__( 'How to get API key?', 'googlemaps-photo-gallery' ) .'</h2>';
 			$html .= '<ol>';
 			$html .= '<li>' .$maps_api_for_web_link .'</li>';
-			$html .= '<li>' .esc_html__( 'Get the API key on the [Credentials] page.', 'googlemaps-photo-gallery' ) .'</li>';
-			$html .= '<li>' .esc_html__( 'Set the API key limit for referrer at only your website.', 'googlemaps-photo-gallery' ) .'</li>';
+			$html .= '<li>' .esc_html__( 'Click the [GET A KEY] button and get your API key.', 'googlemaps-photo-gallery' ) .'</li>';
+			$html .= '<li>' .esc_html__( 'Set API key limit for referrer at only your website.', 'googlemaps-photo-gallery' ) .'</li>';
 			$html .= '<li>' .esc_html__( 'Activate the Google Maps JavaScript API.', 'googlemaps-photo-gallery' ) .'</li>';
 			$html .= '</ol>';
 
@@ -315,18 +315,30 @@ class GoogleMapsPhotoGallery {
 
 		global $post;
 
-		$atts = shortcode_atts( array( 'center' => 0, 'zoom' => 0 ), $atts );
+		// options
+		$atts = shortcode_atts( array( 'center' => 0, 'zoom' => 0 , 'height' => 0 ), $atts );
 		$param = '';
+
+		// google map center photo by menu_order
 		$center = $atts['center'];
 		if(0 <> $center){
 			$param .= ' center="' .$center .'"';
 		}
 
+		// google map zoom
 		$zoom = $atts['zoom'];
 		if( 0 <> $zoom ){
 			$param .= ' zoom="' .$zoom .'"';
 		}
 
+		// height
+		$height = $atts['height'];
+		$style = '';
+		if( 0 <> $height ){
+			$style = ' height: ' .$height .'px;';
+		}
+
+		// photos
 		$output = '';
 		$args = array( 'post_type'       => 'attachment',
 						'posts_per_page' => -1,
@@ -354,8 +366,9 @@ class GoogleMapsPhotoGallery {
 			wp_reset_postdata();
 		}
 
+		// output
 		if( !empty( $output ) ){
-			$output = '<div id="googlemaps_photo_gallery"><div id="gmap"' .$param .'></div><div class="swiper-container"><div class="swiper-wrapper">' .$output .'</div><div class="swiper-button-next"></div><div class="swiper-button-next"></div></div></div>';
+			$output = '<div id="googlemaps_photo_gallery"><div id="gmap"' .$param .' style="' .$style .'"></div><div class="swiper-container"><div class="swiper-wrapper">' .$output .'</div><div class="swiper-pagination"></div><div class="swiper-button-prev"></div><div class="swiper-button-next"></div></div></div>';
 		}
 
 		return $output;

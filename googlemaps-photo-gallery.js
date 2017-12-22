@@ -9,11 +9,7 @@ jQuery( function(){
 
 	var map;
 	var click_marker = false;
-	var photo_max = jQuery( '#googlemaps_photo_gallery .zoom-gallery a' ).length;
-	var thumbnail_width = jQuery( '#googlemaps_photo_gallery .zoom-gallery a' ).outerWidth() + parseInt(jQuery( '#googlemaps_photo_gallery .zoom-gallery a').css('margin-left'), 10 ) + parseInt( jQuery('#googlemaps_photo_gallery .zoom-gallery a').css( 'margin-right' ), 10 );
-	var thumbnails_clip = jQuery( '#googlemaps_photo_gallery .clip' ).width();
-	var thumbnails_max = thumbnail_width * photo_max;
-	jQuery( '#googlemaps_photo_gallery .zoom-gallery' ).css( 'width', thumbnail_width * thumbnails_max + 'px' );
+
 	jQuery( window ).load( function() {
 		initialize();
 	} );
@@ -39,7 +35,7 @@ jQuery( function(){
 		map = new google.maps.Map( document.getElementById( 'gmap' ), myOptions );
 
 		// Set maeker with photo
-		jQuery( '#googlemaps_photo_gallery .zoom-gallery a img' ).each( function(){
+		jQuery( '#googlemaps_photo_gallery .swiper-container img' ).each( function(){
 			var lat = jQuery(this).attr( 'lat' );
 			var lon = jQuery(this).attr( 'lon' );
 			var src = jQuery(this).attr( 'src' );
@@ -93,6 +89,7 @@ jQuery( function(){
 
 	// Zoom for thumbnail
 	jQuery("[data-fancybox]").fancybox({
+		loop : true,
 		buttons : [
 			'close'
 		],
