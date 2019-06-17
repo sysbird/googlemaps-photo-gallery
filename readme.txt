@@ -1,12 +1,12 @@
 === Google Maps Photo Gallery ===
 Contributors: sysbird
-Plugin URI: http://wordpress.org/plugins/googlemaps-photo-gallery/
-Tags: shortcode, google, map, photo, gallery, gps, geo, location, lightbox
+Plugin URI: https://wordpress.org/plugins/googlemaps-photo-gallery/
+Tags: shortcode, google maps, photo, gallery, gps, geo
 Requires at least: 4.0
-Tested up to: 4.9
+Tested up to: 5.2
 Stable tag: 1.2
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
 
 The shortcode for gallery on Google Maps with geotagged photos.
@@ -21,7 +21,7 @@ The shortcode for gallery on Google Maps with geotagged photos.
 * It's compatible with responsive web design.
 * Based on [Google Maps JavaScript API v3](https://developers.google.com/maps/documentation/javascript/).
 * [fancyBox3](https://fancyapps.com/fancybox/3/) the jQuery plugin is Licensed GPLv3 for open source use.
-* [Swiper](http://www.idangero.us/swiper/)  the jQuery plugin is under the MIT License.
+* [Swiper](http://idangero.us/swiper/)  the jQuery plugin is under the MIT License.
 
 
 == Installation ==
@@ -49,7 +49,7 @@ The shortcode for gallery on Google Maps with geotagged photos.
 TORIYAMA Yuko at [sysbird](https://profiles.wordpress.org/sysbird)
 
 = More Information =
-[Description in Japanese](http://www.sysbird.jp/wptips/googlemaps-photo-gallery/)
+[Description in Japanese](http://sysbird.jp/wptips/googlemaps-photo-gallery/)
 
 
 == Screenshots ==

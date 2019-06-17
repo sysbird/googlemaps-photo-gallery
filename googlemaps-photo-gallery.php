@@ -1,7 +1,7 @@
 <?php
 /*
  Plugin Name: Google Maps Photo Gallery
- Plugin URI: http://www.sysbird.jp/wptips/googlemaps-photo-gallery/
+ Plugin URI: https://sysbird.jp/wptips/googlemaps-photo-gallery/
  Description: The shortcode for gallery on Google Maps with geotagged photos.
  Author: sysbird
  Author URI: https://profiles.wordpress.org/sysbird/
