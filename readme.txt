@@ -1,12 +1,12 @@
 === Google Maps Photo Gallery ===
 Contributors: sysbird
-Plugin URI: https://wordpress.org/plugins/googlemaps-photo-gallery/
-Tags: shortcode, google maps, photo, gallery, gps, geo
+Plugin URI: https://wordpress.org/plugins/google-maps-photo-gallery/
+Tags: shortcode, google maps, photo, gallery, gps
 Requires at least: 4.0
-Tested up to: 5.2
+Tested up to: 5.2.2
 Stable tag: 1.2
 License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 
 The shortcode for gallery on Google Maps with geotagged photos.
@@ -15,6 +15,10 @@ The shortcode for gallery on Google Maps with geotagged photos.
 == Description ==
 The shortcode for gallery on Google Maps with geotagged photos.
 
+* [Demo](https://birdsite.jp/2007/09/21/20070921-hakodate/)
+* [GitHub](https://github.com/sysbird/googlemaps-photo-gallery)
+* [Description in Japanese](http://sysbird.jp/wptips/googlemaps-photo-gallery/)
+
 = Features =
 * The plugin displays a gallery on Google Maps with geotagged photos that has been uploaded to post.
 * When clicked the photo on the gallery, zoom in image with lightbox.
@@ -22,17 +26,6 @@ The shortcode for gallery on Google Maps with geotagged photos.
 * Based on [Google Maps JavaScript API v3](https://developers.google.com/maps/documentation/javascript/).
 * [fancyBox3](https://fancyapps.com/fancybox/3/) the jQuery plugin is Licensed GPLv3 for open source use.
 * [Swiper](http://idangero.us/swiper/)  the jQuery plugin is under the MIT License.
-
-
-== Installation ==
-1. Upload the "Google Maps Photo Gallery" folder to the plugins directory in your WordPress installation.
-2. Go to [Google Maps API Web](https://developers.google.com/maps/web/)
-3. Click the [GET A KEY] button and get your API key.
-4. Set API key limit for referrer at only your website.
-5. Activate the Google Maps JavaScript API.
-6. Go to plugins list and activate "Google Maps Photo Gallery".
-7. Set your API Key in "Google Maps Photo Gallery settings page".
-
 
 = Usage =
 1. Upload geotagged photos in post.
@@ -43,13 +36,16 @@ The shortcode for gallery on Google Maps with geotagged photos.
    zoom: Google Maps zooming parameter(0-18 default:15)
    height: Google Maps height(px)(default:500)
 
-[Demo](https://birdsite.jp/2007/09/21/20070921-hakodate/)
 
-= Contributors =
-TORIYAMA Yuko at [sysbird](https://profiles.wordpress.org/sysbird)
-
-= More Information =
-[Description in Japanese](http://sysbird.jp/wptips/googlemaps-photo-gallery/)
+== Installation ==
+1. Upload the entire "Google Maps Photo Gallery" folder to the /wp-content/plugins/ directory.
+2. Activate the plugin through the ‘Plugins’ menu in WordPress.
+3. Go to [Google Maps API Web](https://developers.google.com/maps/web/)
+4. Click the [GET A KEY] button and get your API key.
+5. Set API key limit for referrer at only your website.
+6. Activate the Google Maps JavaScript API.
+7. Go to plugins list and activate "Google Maps Photo Gallery".
+8. Set your API Key in "Google Maps Photo Gallery settings page".
 
 
 == Screenshots ==
